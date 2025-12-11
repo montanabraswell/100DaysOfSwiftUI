@@ -24,3 +24,19 @@ Arrays
 Dictionaries
 Sets
 Enums
+
+
+# Day 4
+Type annotations and checkpoint 2
+
+
+# Day 5
+If, 
+switch, 
+and the ternary operator
+
+
+# Day 6
+Loops, 
+summary, 
+and checkpoint 3
