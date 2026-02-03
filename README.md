@@ -40,3 +40,19 @@ and the ternary operator
 Loops, 
 summary, 
 and checkpoint 3
+
+
+# Day 7
+Functions, 
+parameters, 
+and return values
+
+# Day 8
+Default values, 
+throwing functions, 
+and checkpoint 4
+
+# Day 9
+ Closures,
+ passing functions into functions, 
+ and checkpoint 5
