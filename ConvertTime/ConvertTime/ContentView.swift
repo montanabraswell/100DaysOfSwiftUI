@@ -12,30 +12,71 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var seconds: Int = 0
-    @State private var minutes: Int = 0
-    @State private var hours: Int = 0
-    @State private var days: Int = 0
-    @State private var calculate: Int = 0
+    @State private var inputValue: Double = 0
+    @State private var inputUnit: String = "Seconds"
+    @State private var outputUnit: String = "Minutes"
     
     let time = ["Seconds", "Minutes", "Hours", "Days"]
     @State private var selectedTime = "Seconds"
+    
+    func toSeconds(_ value: Double, unit: String) -> Double {
+        switch unit {
+        case "Minutes":
+            return value * 60
+        case "Hours":
+            return value * 3_600
+        case "Days":
+            return value * 86_400
+        default: // seconds
+            return value
+        }
+    }
+    
+    func fromSeconds(_ seconds: Double, unit: String) -> Double {
+        switch unit {
+        case "Minutes":
+            return seconds / 60
+        case "Hours":
+            return seconds / 3_600
+        case "Days":
+            return seconds / 86_400
+        default:
+            return seconds
+        }
+    }
+    
+    var convertedValue: Double {
+        
+        let seconds = toSeconds(inputValue, unit: inputUnit)
+        return fromSeconds(seconds, unit: outputUnit)
+        
+    }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Calculate Time below, enter a number."){
-                    TextField("Enter a number to convert", value: $seconds, format: .number)
-                        .keyboardType(.decimalPad)
-
-                    Button("Calculate: \(calculate)") {
-                        calculate += 1
+                Section("Enter a number to convert?"){
+                    TextField("Enter a value ", value: $inputValue, format: .number)
+                        .keyboardType(.numberPad)
+                }
+                Picker("Input unit", selection: $inputUnit) {
+                    ForEach(time, id: \.self) { unit in
+                        Text(unit)
                     }
                 }
-                Picker("Select your time conversion", selection: $selectedTime) {
-                    ForEach(time, id: \.self) {
-                        Text($0)
+            }
+            
+            Section("To") {
+                Picker("Output unit", selection: $outputUnit) {
+                    ForEach(time, id: \.self) { unit in
+                        Text(unit)
                     }
+                }
+                
+                Section("Result") {
+                  Text(convertedValue,
+                       format: .number.precision(.fractionLength(2))
+                       )
                 }
             }
             .navigationTitle("ConvertTime")
