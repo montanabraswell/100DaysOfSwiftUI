@@ -10,10 +10,16 @@ import SwiftUI
 struct ContentView: View {
     @State private var countries = ["Estonia","France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
     
+    @State private var userScore = 0
     @State private var correctAnswer = Int.random(in: 0...2)
-    
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    @State private var alertMessage = ""
+    @State private var questionCount = 0
+    @State private var showGameOver = false
+    
+    let maxQuestions = 8
+   
     
     var body: some View {
         ZStack {
@@ -57,7 +63,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Score: ???")
+                Text("Score: \(userScore)")
                     .foregroundStyle(.white)
                     .font(.title.bold())
                 
@@ -68,15 +74,17 @@ struct ContentView: View {
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
         } message: {
-            Text("Your score is ???")
+            Text("Your score is \(userScore)")
         }
     }
     
     func flagTapped(_ number: Int){
         if number == correctAnswer {
             scoreTitle = "Correct"
+            userScore += 1
         } else {
-            scoreTitle = "Wrong"
+            scoreTitle = "Wrong, the correct answer is \(countries[correctAnswer])"
+            userScore -= 1
         }
         
         showingScore = true

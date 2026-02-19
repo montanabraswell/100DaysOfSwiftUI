@@ -56,6 +56,13 @@ struct ContentView: View {
                 Section {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
+                Section(header: Text("Amount per person")) {
+                    
+                    }
+                Section("Total amount of check") {
+                    // brainstorming how to get total check to show
+                    // Text("Grand total of check: " \(grandTotal))
+                }
             }
             .navigationTitle("WeSplit")
             .toolbar {
