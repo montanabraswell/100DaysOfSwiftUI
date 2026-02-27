@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var checkAmount = 0.0
+    @State private var subTotal: Double = 100
     @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
     @FocusState private var amountIsFocused: Bool
@@ -21,18 +21,25 @@ struct ContentView: View {
         let peopleCount = Double(numberOfPeople + 2)
         let tipSelection = Double(tipPercentage)
         
-        let tipValue = checkAmount / 100 * tipSelection
-        let grandTotal = checkAmount + tipValue
+        let tipValue = subTotal / 100 * tipSelection
+        let grandTotal = subTotal + tipValue
         let amountPerPerson = grandTotal / peopleCount
         
         return amountPerPerson
+        
+    }
+    
+    var totalAmount: Double {
+        let tipValue = subTotal / 100 * Double(tipPercentage)
+
+        return subTotal + tipValue
     }
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    TextField("Amount", value: $subTotal, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
                     
@@ -53,15 +60,12 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
                 }
                 
-                Section {
+                Section("Total Amount") {
+                    Text(totalAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                   }
+                
+                Section("Amount per person") {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                }
-                Section(header: Text("Amount per person")) {
-                    
-                    }
-                Section("Total amount of check") {
-                    // brainstorming how to get total check to show
-                    // Text("Grand total of check: " \(grandTotal))
                 }
             }
             .navigationTitle("WeSplit")
