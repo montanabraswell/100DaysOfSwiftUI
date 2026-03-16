@@ -9,11 +9,12 @@ struct ContentView: View {
     @State private var correctAnswer = Int.random(in: 0...2)
 
     @State private var userScore = 0
-    @State private var showingScore = false
-    @State private var updateDisplayScore = false
-    @State private var showAlert = false
+    @State private var isShowingAlert = false
+    //@State private var updateDisplayScore = false
+    //@State private var showAlert = false
     @State private var numOfAnsweredQuestions = 0
-    @State private var gameOver = false
+    @State private var finalAlertMessage = ""
+    @State private var isShowingGameOverAlert = false
     @State private var alertMessage = ""
     @State private var scoreTitle = ""
 
@@ -45,7 +46,7 @@ struct ContentView: View {
                     ForEach(0..<3) { number in
                         Button {
                             flagTapped(number)
-                            updateDisplayScore = true
+                            //updateDisplayScore = true
                         } label: {
                             Image(countries[number])
                                 .clipShape(.capsule)
@@ -69,22 +70,43 @@ struct ContentView: View {
             }
             .padding()
         }
-        .alert(scoreTitle, isPresented: $showingScore) {
+        .alert(scoreTitle, isPresented: $isShowingAlert) {
             Button("Continue") {
                 
                 if numOfAnsweredQuestions < maxNumOfQuestions {
                     askQuestion()
                 } else {
+                    gameOver()
+                 isShowingGameOverAlert = true
                     
                 }
                 
             }
+            
+    
         } message: {
             Text(alertMessage)
             
             
             
             
+        }
+        
+        
+        .alert(scoreTitle, isPresented: $isShowingGameOverAlert) {
+            Button("Restart") {
+               
+                if numOfAnsweredQuestions == 9 {
+                    //showAlert = true
+                   // updateDisplayScore = true
+                    gameOver()
+                    
+                }
+                    
+            
+            }
+        } message: {
+            Text(finalAlertMessage)
         }
     }
 
@@ -93,15 +115,15 @@ struct ContentView: View {
         
         if number == correctAnswer {
             scoreTitle = "Correct!"
-            showAlert = false
-            updateDisplayScore = true
+            //showAlert = false
+            //updateDisplayScore = true
             userScore += 1
         
         } else {
             scoreTitle = "Wrong!"
-            updateDisplayScore = false
+            //updateDisplayScore = false
             userScore -= 1
-            showAlert = true
+            //showAlert = true
         }
         
         let flagMessage = "That's the flag of \(countries[correctAnswer])."
@@ -110,7 +132,7 @@ struct ContentView: View {
         
         alertMessage = flagMessage + "\n" + scoreMessage + "\n" + questionCountMessage
         
-        showingScore = true
+        isShowingAlert = true
     }
 
     func askQuestion() {
@@ -118,12 +140,33 @@ struct ContentView: View {
         correctAnswer = Int.random(in: 0...2)
     }
     
-    func questionsAsked(_ number: Int) {
-       var numOfQuestions = 1
-        while numOfQuestions <= 8 {
+    func gameOver() {
+        
+        if numOfAnsweredQuestions >= maxNumOfQuestions {
+            //showAlert = true
+            //updateDisplayScore = true
+            
+            let gameOver =  "Game Over! Your final score is \(userScore)"
+            let finalScoreMessage = "You have answered \(userScore) out of \(maxNumOfQuestions)"
+            let restartGame = " Want to play again?"
+            
+            finalAlertMessage = gameOver + "\n" + finalScoreMessage + "\n" + restartGame
+            
+            isShowingGameOverAlert = true
+            
+            
+            
+        } else {
             
         }
          
+    }
+    
+    func resetGame() {
+        userScore = 0
+        numOfAnsweredQuestions = 0
+        isShowingGameOverAlert = false
+        askQuestion()
     }
 }
 
