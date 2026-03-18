@@ -9,14 +9,17 @@ struct ContentView: View {
     @State private var correctAnswer = Int.random(in: 0...2)
 
     @State private var userScore = 0
-    @State private var isShowingAlert = false
     //@State private var updateDisplayScore = false
     //@State private var showAlert = false
     @State private var numOfAnsweredQuestions = 0
-    @State private var finalAlertMessage = ""
+    
+    @State private var isShowingQuestionAnswerAlert = false
+    @State private var questionAnswerAlertTitle = ""
+    @State private var questionAnswerAlertMessage = ""
+    
     @State private var isShowingGameOverAlert = false
-    @State private var alertMessage = ""
-    @State private var scoreTitle = ""
+    @State private var gameOverAlertTitle = ""
+    @State private var gameOverAlertMessage = ""
 
     var body: some View {
         ZStack {
@@ -70,43 +73,25 @@ struct ContentView: View {
             }
             .padding()
         }
-        .alert(scoreTitle, isPresented: $isShowingAlert) {
+        .alert(questionAnswerAlertTitle, isPresented: $isShowingQuestionAnswerAlert) {
             Button("Continue") {
-                
                 if numOfAnsweredQuestions < maxNumOfQuestions {
                     askQuestion()
                 } else {
-                    gameOver()
-                 isShowingGameOverAlert = true
-                    
+                    showGameOverAlert()
                 }
-                
             }
-            
-    
         } message: {
-            Text(alertMessage)
-            
-            
-            
-            
+            Text(questionAnswerAlertMessage)
         }
         
         
-        .alert(scoreTitle, isPresented: $isShowingGameOverAlert) {
+        .alert(gameOverAlertTitle, isPresented: $isShowingGameOverAlert) {
             Button("Restart") {
-               
-                if numOfAnsweredQuestions == 9 {
-                    //showAlert = true
-                   // updateDisplayScore = true
-                    gameOver()
-                    
-                }
-                    
-            
+                resetGame()
             }
         } message: {
-            Text(finalAlertMessage)
+            Text(gameOverAlertMessage)
         }
     }
 
@@ -114,13 +99,13 @@ struct ContentView: View {
         numOfAnsweredQuestions += 1
         
         if number == correctAnswer {
-            scoreTitle = "Correct!"
+            questionAnswerAlertTitle = "Correct!"
             //showAlert = false
             //updateDisplayScore = true
             userScore += 1
         
         } else {
-            scoreTitle = "Wrong!"
+            questionAnswerAlertTitle = "Wrong!"
             //updateDisplayScore = false
             userScore -= 1
             //showAlert = true
@@ -128,11 +113,11 @@ struct ContentView: View {
         
         let flagMessage = "That's the flag of \(countries[correctAnswer])."
         let scoreMessage = "Your score is \(userScore)."
-        let questionCountMessage = "You have answered \(numOfAnsweredQuestions) out of \(maxNumOfQuestions) questions."
+        let questionCountMessage = " \(numOfAnsweredQuestions) out of \(maxNumOfQuestions) questions."
         
-        alertMessage = flagMessage + "\n" + scoreMessage + "\n" + questionCountMessage
+        questionAnswerAlertMessage = questionCountMessage + "\n" + flagMessage + "\n" + scoreMessage
         
-        isShowingAlert = true
+        isShowingQuestionAnswerAlert = true
     }
 
     func askQuestion() {
@@ -140,32 +125,25 @@ struct ContentView: View {
         correctAnswer = Int.random(in: 0...2)
     }
     
-    func gameOver() {
+    func showGameOverAlert() {
         
-        if numOfAnsweredQuestions >= maxNumOfQuestions {
             //showAlert = true
             //updateDisplayScore = true
             
-            let gameOver =  "Game Over! Your final score is \(userScore)"
-            let finalScoreMessage = "You have answered \(userScore) out of \(maxNumOfQuestions)"
-            let restartGame = " Want to play again?"
+            let gameOver =  "You answered \(numOfAnsweredQuestions) correctly!"
+            let finalScoreMessage = "Your final score is \(userScore)"
+            let restartGame = "Play again?"
             
-            finalAlertMessage = gameOver + "\n" + finalScoreMessage + "\n" + restartGame
+            gameOverAlertTitle = "Game Over!"
+            gameOverAlertMessage = gameOver + "\n" + finalScoreMessage + "\n" + restartGame
             
             isShowingGameOverAlert = true
-            
-            
-            
-        } else {
-            
-        }
          
     }
     
     func resetGame() {
         userScore = 0
         numOfAnsweredQuestions = 0
-        isShowingGameOverAlert = false
         askQuestion()
     }
 }
