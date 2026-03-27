@@ -9,15 +9,19 @@
 
 ---
 
-## 👋 About Me
+## About Me
 
-I'm Montana, a former Scrum Master of 7 years making a deliberate career transition into iOS development. After spending nearly a decade helping teams ship great software, I decided it was time to build it myself.
+Heyyo! I’m Montana.
 
-This repo is my learning log — raw, real, and updated daily.
+I spent 7 years as a Scrum Master helping teams build great software and now I’m on the other side, learning to build it myself as an iOS developer.
+
+This repository is my journey through each experience . Every commit reflects progress toward becoming a better developer.
+This repo is my learning log that will be updated daily.
 
 📬 Follow the journey: [@montanabraswell](https://x.com/montanabraswell) on X  
-💼 Connect: [LinkedIn](https://linkedin.com) ← _add your link_  
-✍️ Dev blog: [Dev.to](https://dev.to) ← _add your link once set up_
+💼 Connect: [LinkedIn]([https://linkedin.com)](https://www.linkedin.com/in/montanabraswell/) 
+
+✍️ Dev blog: [Dev.to]https://dev.to/montezuuma 
 
 ---
 
@@ -89,9 +93,9 @@ Each folder contains the Xcode project or Swift files from that day's lesson.
 
 ## 💡 Why I'm Doing This
 
-I could have kept managing sprints forever — but I want to understand the full picture. This challenge is my daily proof-of-work. Every commit is a day I showed up.
+I wanted to hold myself accountable and use this challenge as my daily proof-of-work. Every commit is a day I showed up and get closer to getting a role as a iOS Developer
 
-If you're on a similar path, feel free to reach out.
+If you're also doing the challenge, please reach out! :)
 
 ---
 
