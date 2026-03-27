@@ -5,7 +5,7 @@
 ![Framework](https://img.shields.io/badge/Framework-SwiftUI-blue)
 
 > My public commitment to learning iOS development from scratch.  
-> Following [Paul Hudson's 100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui) — one project per day, every day.
+> Following [Paul Hudson's 100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui) 
 
 ---
 
