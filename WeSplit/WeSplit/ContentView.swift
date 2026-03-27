@@ -31,25 +31,27 @@ struct ContentView: View {
     
     var totalAmount: Double {
         let tipValue = subTotal / 100 * Double(tipPercentage)
-
+        
+      
+        
         return subTotal + tipValue
     }
     
+    var totalAmountTextColor: Color {
+        if tipPercentage == 0 {
+            return .red
+        } else {
+            return .black
+        }
+    }
+    
+    
     var body: some View {
+        
         NavigationStack {
             Form {
-                Section {
-                    TextField("Amount", value: $subTotal, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                        .keyboardType(.decimalPad)
-                        .focused($amountIsFocused)
-                    
-                    Picker("Number of people", selection: $numberOfPeople) {
-                        ForEach(2..<100) {
-                            Text("\($0) people")
-                        }
-                    }
-                    .pickerStyle(.navigationLink)
-                }
+                amountSection
+
                 
                 Section("How much do you want to tip?") {
                     Picker("Tip percentage", selection: $tipPercentage) {
@@ -62,7 +64,10 @@ struct ContentView: View {
                 
                 Section("Total Amount") {
                     Text(totalAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                   }
+                        .foregroundStyle(totalAmountTextColor)
+                }
+                
+                
                 
                 Section("Amount per person") {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
@@ -74,10 +79,28 @@ struct ContentView: View {
                     Button("Done") {
                         amountIsFocused = false
                     }
+                    
                 }
             }
         }
     }
+    
+    @ViewBuilder
+    var amountSection: some View {
+        Section {
+            TextField("Amount", value: $subTotal, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                .keyboardType(.decimalPad)
+                .focused($amountIsFocused)
+            
+            Picker("Number of people", selection: $numberOfPeople) {
+                ForEach(2..<100) {
+                    Text("\($0) people")
+                }
+            }
+            .pickerStyle(.navigationLink)
+        }
+    }
+        
 }
 
 #Preview {
