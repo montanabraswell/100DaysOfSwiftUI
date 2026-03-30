@@ -52,26 +52,12 @@ struct ContentView: View {
             Form {
                 amountSection
 
+                tipSelectionSection
+        
+                totalAmountSection
+               
+                amountPerPersonAmount
                 
-                Section("How much do you want to tip?") {
-                    Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(0..<101) {
-                            Text("\($0)%")
-                        }
-                    }
-                    .pickerStyle(.navigationLink)
-                }
-                
-                Section("Total Amount") {
-                    Text(totalAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                        .foregroundStyle(totalAmountTextColor)
-                }
-                
-                
-                
-                Section("Amount per person") {
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                }
             }
             .navigationTitle("WeSplit")
             .toolbar {
@@ -99,6 +85,33 @@ struct ContentView: View {
             }
             .pickerStyle(.navigationLink)
         }
+    }
+    
+    var tipSelectionSection: some View {
+        Section("How much do you want to tip?") {
+            Picker("Tip percentage", selection: $tipPercentage) {
+                ForEach(0..<101) {
+                    Text("\($0)%")
+                }
+            }
+            .pickerStyle(.navigationLink)
+        }
+    }
+    
+    var totalAmountSection: some View {
+        
+        Section("Total Amount") {
+            Text(totalAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                .foregroundStyle(totalAmountTextColor)
+        }
+        
+    }
+    
+    var amountPerPersonAmount: some View {
+         Section("Amount per person") {
+             Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+         }
+        
     }
         
 }

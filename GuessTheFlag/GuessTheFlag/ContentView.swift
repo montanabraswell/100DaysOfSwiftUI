@@ -20,6 +20,17 @@ struct ContentView: View {
     @State private var isShowingGameOverAlert = false
     @State private var gameOverAlertTitle = ""
     @State private var gameOverAlertMessage = ""
+    
+    
+    struct FlagImage: View {
+        var imageName: String
+        
+        var body: some View {
+            Image(imageName)
+                .clipShape(.capsule)
+                .shadow(radius: 5)
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -51,7 +62,7 @@ struct ContentView: View {
                             flagTapped(number)
                             //updateDisplayScore = true
                         } label: {
-                            Image(countries[number])
+                            FlagImage(imageName: countries[number])
                                 .clipShape(.capsule)
                                 .shadow(radius: 5)
                         }
