@@ -2,6 +2,26 @@
 
 import SwiftUI
 
+
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundStyle(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(.rect(cornerRadius: 10))
+    }
+}
+
+extension View {
+    func titleStyle() -> some View {
+        modifier(Title())
+    }
+}
+
+
+
 struct ContentView: View {
     private let maxNumOfQuestions = 8
     
@@ -9,8 +29,6 @@ struct ContentView: View {
     @State private var correctAnswer = Int.random(in: 0...2)
 
     @State private var userScore = 0
-    //@State private var updateDisplayScore = false
-    //@State private var showAlert = false
     @State private var numOfAnsweredQuestions = 0
     
     @State private var isShowingQuestionAnswerAlert = false
@@ -21,6 +39,7 @@ struct ContentView: View {
     @State private var gameOverAlertTitle = ""
     @State private var gameOverAlertMessage = ""
     
+  
     
     struct FlagImage: View {
         var imageName: String
@@ -44,8 +63,9 @@ struct ContentView: View {
                 Spacer()
 
                 Text("Guess the Flag")
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(.white)
+                    .titleStyle()
+                    //.font(.largeTitle.bold())
+                    //.foregroundStyle(.white)
 
                 VStack(spacing: 15) {
                     VStack {
@@ -54,7 +74,8 @@ struct ContentView: View {
                             .font(.subheadline.weight(.heavy))
 
                         Text(countries[correctAnswer])
-                            .font(.largeTitle.weight(.semibold))
+                            .modifier(Title())
+                            //.font(.largeTitle.weight(.semibold))
                     }
 
                     ForEach(0..<3) { number in
@@ -77,8 +98,9 @@ struct ContentView: View {
                 Spacer()
 
                 Text("Score: \(userScore)")
-                    .foregroundStyle(.white)
-                    .font(.title.bold())
+                    .modifier(Title())
+                    //.foregroundStyle(.white)
+                    //.font(.title.bold())
 
                 Spacer()
             }
@@ -106,6 +128,7 @@ struct ContentView: View {
         }
     }
 
+    
     func flagTapped(_ number: Int) {
         numOfAnsweredQuestions += 1
         
