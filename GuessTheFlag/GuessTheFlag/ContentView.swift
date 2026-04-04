@@ -3,7 +3,7 @@
 import SwiftUI
 
 
-struct Title: ViewModifier {
+struct LargeTitleStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.largeTitle)
@@ -16,7 +16,7 @@ struct Title: ViewModifier {
 
 extension View {
     func titleStyle() -> some View {
-        modifier(Title())
+        modifier(LargeTitleStyle())
     }
 }
 
@@ -74,7 +74,7 @@ struct ContentView: View {
                             .font(.subheadline.weight(.heavy))
 
                         Text(countries[correctAnswer])
-                            .modifier(Title())
+                            .modifier(LargeTitleStyle())
                             //.font(.largeTitle.weight(.semibold))
                     }
 
@@ -98,7 +98,7 @@ struct ContentView: View {
                 Spacer()
 
                 Text("Score: \(userScore)")
-                    .modifier(Title())
+                    .modifier(LargeTitleStyle())
                     //.foregroundStyle(.white)
                     //.font(.title.bold())
 
