@@ -7,55 +7,45 @@
 
 import SwiftUI
 
-struct RockMoves: View {
-    var body: some View {
-        Text("Rock")
-    }
-}
 
-struct PaperMoves: View {
-    var body: some View {
-        Text("Paper")
-    }
-}
-
-struct ScissorsMoves: View {
-    var body: some View {
-        Text("Scissors")
-    }
+enum GameChoice {
+    case rock
+    case paper
+    case scissors
 }
 struct ContentView: View {
-    @State private var rockMoves = ""
-    @State private var paperMoves = ""
-    @State private var scissorsMove = ""
     
+    @State private var ChooseGameChoice: GameChoice = .rock
     @State private var playerWinOrLose = false
     
-    enum GameChoice {
-        case rock, paper, scissors
-    }
     
-    @State private var gameChoice = GameChoice.rock
     
     var body: some View {
         VStack {
-            if Bool.random() {
-                Rectangle()
-            } else {
-                Circle()
+            
+            Text("Choose your weapon!")
+            
+            Button("Rock") {
+                if GameChoice.rock == .rock {
+                    print("Rock and Win")
+                }
             }
+            Button("Paper") {
+                if GameChoice.rock == .paper {
+                    print("Paper and Win")
+                }
+            }
+            Button("Scissors") {
+                if GameChoice.scissors == .scissors {
+                    print("Scissors and Win")
+                }
+                
+            }
+            
         }
-        .padding()
+        
     }
 }
-
 #Preview {
     ContentView()
 }
-//switch gameChoice {
-//case .rock:
-   // Text("Rock")
-//case .paper:
-    //<#code#>
-//case .scissors:
-    //<#code#>
