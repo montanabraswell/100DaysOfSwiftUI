@@ -15,35 +15,82 @@ enum GameChoice {
 }
 struct ContentView: View {
     
-    @State private var ChooseGameChoice: GameChoice = .rock
+  
+    // Store player score 
+    @State private var playerScore = 0
+    // Keep track of questions til we get to 10
+    @State private var numOfAnsweredQuestions = 0
+    // keep track of what player picked
+    @State private var playerChoice: GameChoice = .rock
+    // keep track of what computer randomly picked
+    @State private var computerGameChoice: GameChoice = .rock
     @State private var playerWinOrLose = false
+   
+
     
     
     
     var body: some View {
-        VStack {
-            
-            Text("Choose your weapon!")
-            
-            Button("Rock") {
-                if GameChoice.rock == .rock {
-                    print("Rock and Win")
+        VStack(spacing: 30) {
+            VStack{
+                VStack {
+                    
                 }
-            }
-            Button("Paper") {
-                if GameChoice.rock == .paper {
-                    print("Paper and Win")
-                }
-            }
-            Button("Scissors") {
-                if GameChoice.scissors == .scissors {
-                    print("Scissors and Win")
+                Text("RPS Simulator")
+                    .font(.largeTitle)
+                    
+                
+                switch self.computerGameChoice {
+                case .rock:
+                   Text("Rock and Win")
+                case .paper:
+                   Text("Paper and Win ")
+                case .scissors:
+                    Text("Scissor and Lose")
                 }
                 
+                    Button("Rock") {
+                    playerChoice = .rock
+                    getComputerChoice()
+                }
+                    Button("Paper") {
+                    playerChoice = .paper
+                    getComputerChoice()
+                }
+                    Button("Scissors") {
+                    playerChoice = .scissors
+                    getComputerChoice()
+                }
             }
-            
         }
         
+        
+    }
+    
+    func getPlayerScore(_ number: Int) {
+        
+        // need counter to go to the next question each time it runs.
+        numOfAnsweredQuestions += 1
+        
+        // we need to compare correct number and player score
+        
+        
+    }
+    
+    func getComputerChoice() {
+        // use randomizeGameChoice to set game choice
+        let randomizeGameChoice = Int.random(in:0...2)
+        
+        switch randomizeGameChoice {
+        case 0:
+            computerGameChoice = .rock
+        case 1:
+            computerGameChoice = .paper
+        case 2:
+            computerGameChoice = .scissors
+        default:
+            computerGameChoice = .rock
+        }
     }
 }
 #Preview {
