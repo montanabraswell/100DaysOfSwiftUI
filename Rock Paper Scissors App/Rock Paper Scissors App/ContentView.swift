@@ -16,7 +16,7 @@ enum GameChoice {
 struct ContentView: View {
     
   
-    // Store player score 
+    // Store player score
     @State private var playerScore = 0
     // Keep track of questions til we get to 10
     @State private var numOfAnsweredQuestions = 0
@@ -24,7 +24,7 @@ struct ContentView: View {
     @State private var playerChoice: GameChoice = .rock
     // keep track of what computer randomly picked
     @State private var computerGameChoice: GameChoice = .rock
-    @State private var playerWinOrLose = false
+    @State private var playerShouldWin = false
    
 
     
