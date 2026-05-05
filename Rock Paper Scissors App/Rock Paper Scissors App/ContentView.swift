@@ -8,10 +8,18 @@
 import SwiftUI
 
 
-enum GameChoice {
+enum GameChoice: CaseIterable {
     case rock
     case paper
     case scissors
+    
+    var displayValue: String {
+        switch self {
+        case .rock: "Rock"
+        case .paper: "Paper"
+        case .scissors: "Scissors"
+        }
+    }
 }  // closes enum
 
 struct ContentView: View {  // opens struct
@@ -31,31 +39,67 @@ struct ContentView: View {  // opens struct
     var body: some View {  // opens body
         VStack {  // opens VStack
             Text("RPS Simulator")
-            Button("Rock") {  // opens button action
-                playerChoice = .rock
-                getComputerChoice()
-            }  // closes button action
+                .padding(.vertical)
+            
+            Text("Your opponent chose rock.") // TODO update this to when someone clicks what should show which variable same to line 45
+            Text("Your goal is to win.") // TODO
+            
+            Text("Which should you choose?")
+                .padding(.vertical)
+            
+            ForEach(GameChoice.allCases, id: \.self) { choice in
+                Button(choice.displayValue) {  // opens button action
+                    playerChoice = choice
+                    checkAnswer()
+                    getComputerChoice()
+                    
+                }  // closes button action
+            }
+            
+            
+            Text("Score: \(playerScore)")
+                .padding()
+          
         }  // closes VStack
 
     }  // closes body
     
-    func getComputerChoice() {      // opens function
-        let randomizeGameChoice = Int.random(in:0...2)
-        
-        switch randomizeGameChoice { // opens switch
-        case 0:
-            computerGameChoice = .rock
-        case 1:
-            computerGameChoice = .paper
-        case 2:
-            computerGameChoice = .scissors
-        default:
-            computerGameChoice = .rock
-        }                            // closes switch
-    }                                // closes functionses function
+    func getComputerChoice() {     // opens function
+        computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
+    }
     
     func checkAnswer() {
-        var didPlayerWin = false
+        // compare player choice and computer game choice
+        // compare case and check if its correct
+        // if correct, plus one to the score
+        // if incorrect minus one to the score
+        // compare if did player win and should they win
+    
+        var didPlayerWin: Bool
+        var correctChoice: GameChoice
+        
+        switch computerGameChoice {
+        case .rock:
+            //copy teh rest to paper and scissors then uncomments line 97 to 101
+            if playerShouldWin {
+                correctChoice = .paper
+            } else {
+                correctChoice = .scissors
+            }
+        case .paper:
+            // TODO
+            break
+        case .scissors:
+            // TODO
+            break
+        }
+        
+//        if playerChoice == correctChoice {
+//            playerScore += 1
+//        } else {
+//            playerScore -= 1
+//        }
+        
         switch (playerChoice, computerGameChoice) {
                        case (.rock, .rock):
                            print(" Its a draw")
@@ -63,32 +107,45 @@ struct ContentView: View {  // opens struct
                            
                        case (.rock, .paper):
                            print("paper wins")
-                            didPlayerWin = true
+                            didPlayerWin = false
                            
                        case (.rock, .scissors):
                            print(" Rock wins")
                             didPlayerWin = true
+            
                        case (.paper, .rock):
                            print(" paper wins ")
                             didPlayerWin = true
+            
                        case (.paper, .paper):
                            print(" draw ")
                             didPlayerWin = false
+            
                        case (.paper, .scissors):
                            print(" scissors wins ")
                             didPlayerWin = false
+            
                       case (.scissors, .rock):
                            print(" rock wins ")
                             didPlayerWin = false
                            
                       case (.scissors, .paper):
                            print(" scissors wins ")
-                            didPlayerWin = false
+                            didPlayerWin = true
                            
                       case (.scissors, .scissors):
                            print(" draw ")
                             didPlayerWin = false
+            }
+    
+        
+        if didPlayerWin == playerShouldWin {
+            playerScore += 1
+        } else {
+            playerScore -= 1
         }
+        
+        playerShouldWin.toggle()
     }
     
 }  // closes struct
