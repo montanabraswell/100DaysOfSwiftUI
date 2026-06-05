@@ -33,6 +33,9 @@ struct ContentView: View {  // opens struct
        // keep track of what computer randomly picked
        @State private var computerGameChoice: GameChoice = .rock
        @State private var playerShouldWin = false
+       @State private var isShowingGameOverAlert = false
+       @State private var gameOverAlertTitle = ""
+       @State private var showFinalScoreAlertMessage = ""
 
 
 
@@ -41,8 +44,9 @@ struct ContentView: View {  // opens struct
             Text("RPS Simulator")
                 .padding(.vertical)
             
-            Text("Your opponent chose rock.") // TODO update this to when someone clicks what should show which variable same to line 45
-            Text("Your goal is to win.") // TODO
+            Text("Your opponent chose: \(computerGameChoice).") // TODO update this to when someone clicks what should show which variable same to line 45
+            
+            Text("Your goal is to : \(playerShouldWin ? " Win " : "Lose ")") // TODO
             
             Text("Which should you choose?")
                 .padding(.vertical)
@@ -51,21 +55,53 @@ struct ContentView: View {  // opens struct
                 Button(choice.displayValue) {  // opens button action
                     playerChoice = choice
                     checkAnswer()
+                    
+                    // update number of questions that have been answered
+                    numOfAnsweredQuestions += 1
+                    checkIfGameIsOver()
+                    
                     getComputerChoice()
                     
+                    
                 }  // closes button action
+            
             }
-            
-            
-            Text("Score: \(playerScore)")
+                Text("Score: \(playerScore)")
                 .padding()
+            
+            
+            // make an alert and connect it with the boolean
+                .alert("Game Over!\nFinal score is: \(playerScore)", isPresented: $isShowingGameOverAlert) {
+                    Button("Restart") {
+                        checkIfGameIsOver()
+                        resetGame()
+                    }
+                }
           
+            
         }  // closes VStack
 
     }  // closes body
+
     
     func getComputerChoice() {     // opens function
         computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
+    }
+    
+    func checkIfGameIsOver() {
+        // if game is over
+        if numOfAnsweredQuestions == 10 {
+            print("Game Over")
+            isShowingGameOverAlert = true
+        } else {
+            print("Game is not over because you only answered \(numOfAnsweredQuestions)")
+        }
+    }
+    
+    func resetGame() {
+        playerScore = 0
+        numOfAnsweredQuestions = 0
+        
     }
     
     func checkAnswer() {
@@ -76,7 +112,7 @@ struct ContentView: View {  // opens struct
         // compare if did player win and should they win
     
         var didPlayerWin: Bool
-        var correctChoice: GameChoice
+        let correctChoice: GameChoice
         
         switch computerGameChoice {
         case .rock:
@@ -87,18 +123,22 @@ struct ContentView: View {  // opens struct
                 correctChoice = .scissors
             }
         case .paper:
-            // TODO
-            break
+            //
+            if playerShouldWin {
+                correctChoice = .scissors
+            } else {
+                correctChoice = .rock
+            }
+           
         case .scissors:
-            // TODO
-            break
+            
+            if playerShouldWin {
+                correctChoice = .rock
+            } else {
+                correctChoice = .paper
+            }
         }
         
-//        if playerChoice == correctChoice {
-//            playerScore += 1
-//        } else {
-//            playerScore -= 1
-//        }
         
         switch (playerChoice, computerGameChoice) {
                        case (.rock, .rock):
