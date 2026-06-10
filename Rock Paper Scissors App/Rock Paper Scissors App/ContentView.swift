@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-enum GameChoice: CaseIterable {
+enum GameChoice: String, CaseIterable {
     case rock
     case paper
     case scissors
@@ -44,7 +44,7 @@ struct ContentView: View {  // opens struct
             Text("RPS Simulator")
                 .padding(.vertical)
             
-            Text("Your opponent chose: \(computerGameChoice).") // TODO update this to when someone clicks what should show which variable same to line 45
+            Text("Your opponent chose: \(computerGameChoice.displayValue).") // TODO update this to when someone clicks what should show which variable same to line 45
             
             Text("Your goal is to : \(playerShouldWin ? " Win " : "Lose ")") // TODO
             
@@ -73,7 +73,6 @@ struct ContentView: View {  // opens struct
             // make an alert and connect it with the boolean
                 .alert("Game Over!\nFinal score is: \(playerScore)", isPresented: $isShowingGameOverAlert) {
                     Button("Restart") {
-                        checkIfGameIsOver()
                         resetGame()
                     }
                 }
@@ -122,6 +121,8 @@ struct ContentView: View {  // opens struct
             } else {
                 correctChoice = .scissors
             }
+            didPlayerWin = (correctChoice == playerChoice)
+            
         case .paper:
             //
             if playerShouldWin {
@@ -129,7 +130,7 @@ struct ContentView: View {  // opens struct
             } else {
                 correctChoice = .rock
             }
-           
+            didPlayerWin = (correctChoice == playerChoice)
         case .scissors:
             
             if playerShouldWin {
@@ -137,47 +138,9 @@ struct ContentView: View {  // opens struct
             } else {
                 correctChoice = .paper
             }
+            didPlayerWin = (correctChoice == playerChoice)
         }
         
-        
-        switch (playerChoice, computerGameChoice) {
-                       case (.rock, .rock):
-                           print(" Its a draw")
-                            didPlayerWin = false
-                           
-                       case (.rock, .paper):
-                           print("paper wins")
-                            didPlayerWin = false
-                           
-                       case (.rock, .scissors):
-                           print(" Rock wins")
-                            didPlayerWin = true
-            
-                       case (.paper, .rock):
-                           print(" paper wins ")
-                            didPlayerWin = true
-            
-                       case (.paper, .paper):
-                           print(" draw ")
-                            didPlayerWin = false
-            
-                       case (.paper, .scissors):
-                           print(" scissors wins ")
-                            didPlayerWin = false
-            
-                      case (.scissors, .rock):
-                           print(" rock wins ")
-                            didPlayerWin = false
-                           
-                      case (.scissors, .paper):
-                           print(" scissors wins ")
-                            didPlayerWin = true
-                           
-                      case (.scissors, .scissors):
-                           print(" draw ")
-                            didPlayerWin = false
-            }
-    
         
         if didPlayerWin == playerShouldWin {
             playerScore += 1
