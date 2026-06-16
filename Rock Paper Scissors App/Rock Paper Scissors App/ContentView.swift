@@ -120,5 +120,5 @@ struct RockPaperScissorsView: View {  // opens struct
 }  // closes struct
 
 #Preview {  // opens preview
-    ContentView()
+    RockPaperScissorsView()
 }  // closes preview
