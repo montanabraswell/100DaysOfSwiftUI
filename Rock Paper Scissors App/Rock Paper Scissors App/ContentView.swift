@@ -33,16 +33,7 @@ struct ContentView: View {  // opens struct
             
             ForEach(GameChoice.allCases, id: \.self) { choice in
                 Button(choice.displayValue) {  // opens button action
-                    playerChoice = choice
-                    checkAnswer()
-                    
-                    // update number of questions that have been answered
-                    numOfAnsweredQuestions += 1
-                    checkIfGameIsOver()
-                    
-                    getComputerChoice()
-                    
-                    
+                    playerDidChoose(choice)
                 }  // closes button action
             }
             
@@ -55,6 +46,17 @@ struct ContentView: View {  // opens struct
                 }
         }  // closes VStack
     }  // closes body
+    
+    private func playerDidChoose(_ choice: GameChoice) {
+        playerChoice = choice
+        checkAnswer()
+        
+        // update number of questions that have been answered
+        numOfAnsweredQuestions += 1
+        checkIfGameIsOver()
+        
+        getComputerChoice()
+    }
     
     func getComputerChoice() {     // opens function
         computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
