@@ -12,8 +12,6 @@ struct RockPaperScissorsView: View {  // opens struct
        @State private var playerScore = 0
        // Keep track of questions til we get to 10
        @State private var numOfAnsweredQuestions = 0
-       // keep track of what player picked
-       @State private var playerChoice: GameChoice = .rock
        // keep track of what computer randomly picked
        @State private var computerGameChoice: GameChoice = .rock
        @State private var playerShouldWin = false
@@ -48,8 +46,7 @@ struct RockPaperScissorsView: View {  // opens struct
     }  // closes body
     
     private func playerDidChoose(_ choice: GameChoice) {
-        playerChoice = choice
-        checkAnswer()
+        checkAnswer(choice)
         
         // update number of questions that have been answered
         numOfAnsweredQuestions += 1
@@ -77,7 +74,7 @@ struct RockPaperScissorsView: View {  // opens struct
         numOfAnsweredQuestions = 0
     }
     
-    func checkAnswer() {
+    func checkAnswer(_ choice: GameChoice) {
         // compare player choice and computer game choice
         // compare case and check if its correct
         // if correct, plus one to the score
@@ -107,7 +104,7 @@ struct RockPaperScissorsView: View {  // opens struct
             }
         }
         
-        let didPlayerWin = (correctChoice == playerChoice)
+        let didPlayerWin = (correctChoice == choice)
         
         if didPlayerWin == playerShouldWin {
             playerScore += 1
