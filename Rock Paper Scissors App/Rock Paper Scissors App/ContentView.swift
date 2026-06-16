@@ -31,12 +31,12 @@ struct RockPaperScissorsView: View {  // opens struct
             
             Text("Score: \(viewModel.playerScore)")
                 .padding()
-                .alert("Game Over!\nFinal score is: \(viewModel.playerScore)", isPresented: $viewModel.isShowingGameOverAlert) {
-                    Button("Restart") {
-                        viewModel.resetGame()
-                    }
-                }
         }  // closes VStack
+        .alert("Game Over!\nFinal score is: \(viewModel.playerScore)", isPresented: $viewModel.isShowingGameOverAlert) {
+            Button("Restart") {
+                viewModel.resetGame()
+            }
+        }
     }  // closes body
 }  // closes struct
 
