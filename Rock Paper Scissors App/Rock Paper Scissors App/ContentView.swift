@@ -12,19 +12,19 @@ struct RockPaperScissorsView: View {  // opens struct
     @State private var viewModel = RockPaperScissorsViewModel()
 
     var body: some View {  // opens body
-        VStack(spacing: 20) {  // opens VStack
-            Text("RPS Simulator")
-            
-            instructionTexts
-            playerChoiceButtons
-            
-            Text("Score: \(viewModel.playerScore)")
-        }  // closes VStack
-        .alert("Game Over!\nFinal score is: \(viewModel.playerScore)", isPresented: $viewModel.isShowingGameOverAlert) {
-            Button("Restart") {
-                viewModel.resetGame()
-            }
-        }
+        NavigationStack {  // opens NavigationStack
+            VStack(spacing: 20) {  // opens VStack
+                instructionTexts
+                playerChoiceButtons
+                Text("Score: \(viewModel.playerScore)")
+            }  // closes VStack
+            .navigationTitle("RPS Simulator")
+            .alert("Game Over!\nFinal score is: \(viewModel.playerScore)", isPresented: $viewModel.isShowingGameOverAlert) {
+                Button("Restart") {
+                    viewModel.resetGame()
+                }
+            }  // closes alert
+        }  // closes navigation stack
     }  // closes body
     
     private var instructionTexts: some View {
