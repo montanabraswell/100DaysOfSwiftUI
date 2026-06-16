@@ -9,6 +9,7 @@ import Foundation
 
 @Observable
 class RockPaperScissorsViewModel {
+    
     var playerScore = 0
     // keep track of what computer randomly picked
     var computerGameChoice: GameChoice = .rock
@@ -22,30 +23,13 @@ class RockPaperScissorsViewModel {
         let playerWasCorrect = checkAnswer(choice)
         updateScore(playerWasCorrect: playerWasCorrect)
         
-        // update number of questions that have been answered
-        numOfAnsweredQuestions += 1
-        checkIfGameIsOver()
-        
-        playerShouldWin.toggle()
-        getComputerChoice()
+        incrementQuestion()
+        resetQuestion()
     }
     
     func resetGame() {
         playerScore = 0
         numOfAnsweredQuestions = 0
-    }
-    
-    private func getComputerChoice() {
-        computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
-    }
-    
-    private func checkIfGameIsOver() {
-        if numOfAnsweredQuestions == 10 {
-            print("Game Over")
-            isShowingGameOverAlert = true
-        } else {
-            print("Game is not over because you only answered \(numOfAnsweredQuestions)")
-        }
     }
     
     private func checkAnswer(_ choice: GameChoice) -> Bool {
@@ -87,6 +71,26 @@ class RockPaperScissorsViewModel {
             playerScore += 1
         } else {
             playerScore -= 1
+        }
+    }
+    
+    private func incrementQuestion() {
+        // update number of questions that have been answered
+        numOfAnsweredQuestions += 1
+        showAlertIfGameOver()
+    }
+    
+    private func resetQuestion() {
+        playerShouldWin.toggle()
+        computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
+    }
+    
+    private func showAlertIfGameOver() {
+        if numOfAnsweredQuestions == 10 {
+            print("Game Over")
+            isShowingGameOverAlert = true
+        } else {
+            print("Game is not over because you only answered \(numOfAnsweredQuestions)")
         }
     }
 }
