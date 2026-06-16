@@ -10,12 +10,13 @@ import Foundation
 @Observable
 class RockPaperScissorsViewModel {
     var playerScore = 0
-    // Keep track of questions til we get to 10
-    var numOfAnsweredQuestions = 0
     // keep track of what computer randomly picked
     var computerGameChoice: GameChoice = .rock
     var playerShouldWin = false
     var isShowingGameOverAlert = false
+    
+    // Keep track of questions til we get to 10
+    private var numOfAnsweredQuestions = 0
     
     func playerDidChoose(_ choice: GameChoice) {
         let playerWasCorrect = checkAnswer(choice)
@@ -34,12 +35,11 @@ class RockPaperScissorsViewModel {
         numOfAnsweredQuestions = 0
     }
     
-    private func getComputerChoice() {     // opens function
+    private func getComputerChoice() {
         computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
     }
     
     private func checkIfGameIsOver() {
-        // if game is over
         if numOfAnsweredQuestions == 10 {
             print("Game Over")
             isShowingGameOverAlert = true
