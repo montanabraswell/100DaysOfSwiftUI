@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {  // opens struct
+struct RockPaperScissorsView: View {  // opens struct
    
        @State private var playerScore = 0
        // Keep track of questions til we get to 10
