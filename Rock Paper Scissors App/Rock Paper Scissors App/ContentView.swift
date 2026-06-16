@@ -12,25 +12,13 @@ struct RockPaperScissorsView: View {  // opens struct
     @State private var viewModel = RockPaperScissorsViewModel()
 
     var body: some View {  // opens body
-        VStack {  // opens VStack
+        VStack(spacing: 20) {  // opens VStack
             Text("RPS Simulator")
-                .padding(.vertical)
             
-            Text("Your opponent chose: \(viewModel.computerGameChoice.displayValue).")
-            
-            Text("Your goal is to : \(viewModel.playerShouldWin ? " Win " : "Lose ")")
-            
-            Text("Which should you choose?")
-                .padding(.vertical)
-            
-            ForEach(GameChoice.allCases, id: \.self) { choice in
-                Button(choice.displayValue) {  // opens button action
-                    viewModel.playerDidChoose(choice)
-                }  // closes button action
-            }
+            instructionTexts
+            playerChoiceButtons
             
             Text("Score: \(viewModel.playerScore)")
-                .padding()
         }  // closes VStack
         .alert("Game Over!\nFinal score is: \(viewModel.playerScore)", isPresented: $viewModel.isShowingGameOverAlert) {
             Button("Restart") {
@@ -38,6 +26,27 @@ struct RockPaperScissorsView: View {  // opens struct
             }
         }
     }  // closes body
+    
+    private var instructionTexts: some View {
+        VStack {
+            Text("Your opponent chose: \(viewModel.computerGameChoice.displayValue).")
+            
+            Text("Your goal is to : \(viewModel.playerShouldWin ? " Win " : "Lose ")")
+            
+            Text("Which should you choose?")
+                .padding(.top, 8)
+        }
+    }
+    
+    private var playerChoiceButtons: some View {
+        VStack {
+            ForEach(GameChoice.allCases, id: \.self) { choice in
+                Button(choice.displayValue) {  // opens button action
+                    viewModel.playerDidChoose(choice)
+                }  // closes button action
+            }
+        }
+    }
 }  // closes struct
 
 #Preview {  // opens preview
