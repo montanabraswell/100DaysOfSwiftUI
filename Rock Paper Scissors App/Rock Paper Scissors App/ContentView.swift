@@ -46,12 +46,14 @@ struct RockPaperScissorsView: View {  // opens struct
     }  // closes body
     
     private func playerDidChoose(_ choice: GameChoice) {
-        checkAnswer(choice)
+        let playerWasCorrect = checkAnswer(choice)
+        updateScore(playerWasCorrect: playerWasCorrect)
         
         // update number of questions that have been answered
         numOfAnsweredQuestions += 1
         checkIfGameIsOver()
         
+        playerShouldWin.toggle()
         getComputerChoice()
     }
     
@@ -74,12 +76,9 @@ struct RockPaperScissorsView: View {  // opens struct
         numOfAnsweredQuestions = 0
     }
     
-    func checkAnswer(_ choice: GameChoice) {
+    private func checkAnswer(_ choice: GameChoice) -> Bool {
         // compare player choice and computer game choice
         // compare case and check if its correct
-        // if correct, plus one to the score
-        // if incorrect minus one to the score
-        // compare if did player win and should they win
         
         let correctChoice: GameChoice
         
@@ -105,14 +104,18 @@ struct RockPaperScissorsView: View {  // opens struct
         }
         
         let didPlayerWin = (correctChoice == choice)
-        
-        if didPlayerWin == playerShouldWin {
+        return didPlayerWin == playerShouldWin
+    }
+    
+    private func updateScore(playerWasCorrect: Bool) {
+        // if correct, plus one to the score
+        // if incorrect minus one to the score
+        // compare if did player win and should they win
+        if playerWasCorrect {
             playerScore += 1
         } else {
             playerScore -= 1
         }
-        
-        playerShouldWin.toggle()
     }
 }  // closes struct
 
