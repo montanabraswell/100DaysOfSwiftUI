@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {  // opens struct
    
        @State private var playerScore = 0
-       @State private var correctAnswer = Int.random(in: 0...2)
        // Keep track of questions til we get to 10
        @State private var numOfAnsweredQuestions = 0
        // keep track of what player picked
@@ -19,19 +18,15 @@ struct ContentView: View {  // opens struct
        @State private var computerGameChoice: GameChoice = .rock
        @State private var playerShouldWin = false
        @State private var isShowingGameOverAlert = false
-       @State private var gameOverAlertTitle = ""
-       @State private var showFinalScoreAlertMessage = ""
-
-
 
     var body: some View {  // opens body
         VStack {  // opens VStack
             Text("RPS Simulator")
                 .padding(.vertical)
             
-            Text("Your opponent chose: \(computerGameChoice.displayValue).") // TODO update this to when someone clicks what should show which variable same to line 45
+            Text("Your opponent chose: \(computerGameChoice.displayValue).")
             
-            Text("Your goal is to : \(playerShouldWin ? " Win " : "Lose ")") // TODO
+            Text("Your goal is to : \(playerShouldWin ? " Win " : "Lose ")")
             
             Text("Which should you choose?")
                 .padding(.vertical)
@@ -49,24 +44,17 @@ struct ContentView: View {  // opens struct
                     
                     
                 }  // closes button action
-            
             }
-                Text("Score: \(playerScore)")
+            
+            Text("Score: \(playerScore)")
                 .padding()
-            
-            
-            // make an alert and connect it with the boolean
                 .alert("Game Over!\nFinal score is: \(playerScore)", isPresented: $isShowingGameOverAlert) {
                     Button("Restart") {
                         resetGame()
                     }
                 }
-          
-            
         }  // closes VStack
-
     }  // closes body
-
     
     func getComputerChoice() {     // opens function
         computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
@@ -85,7 +73,6 @@ struct ContentView: View {  // opens struct
     func resetGame() {
         playerScore = 0
         numOfAnsweredQuestions = 0
-        
     }
     
     func checkAnswer() {
@@ -135,7 +122,6 @@ struct ContentView: View {  // opens struct
         
         playerShouldWin.toggle()
     }
-    
 }  // closes struct
 
 #Preview {  // opens preview
