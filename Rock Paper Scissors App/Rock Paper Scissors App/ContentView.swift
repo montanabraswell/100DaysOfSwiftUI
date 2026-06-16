@@ -7,24 +7,29 @@
 
 import SwiftUI
 
+@Observable
+class RockPaperScissorsViewModel {
+    var playerScore = 0
+    // Keep track of questions til we get to 10
+    var numOfAnsweredQuestions = 0
+    // keep track of what computer randomly picked
+    var computerGameChoice: GameChoice = .rock
+    var playerShouldWin = false
+    var isShowingGameOverAlert = false
+}
+
 struct RockPaperScissorsView: View {  // opens struct
-   
-       @State private var playerScore = 0
-       // Keep track of questions til we get to 10
-       @State private var numOfAnsweredQuestions = 0
-       // keep track of what computer randomly picked
-       @State private var computerGameChoice: GameChoice = .rock
-       @State private var playerShouldWin = false
-       @State private var isShowingGameOverAlert = false
+    
+    @State private var viewModel = RockPaperScissorsViewModel()
 
     var body: some View {  // opens body
         VStack {  // opens VStack
             Text("RPS Simulator")
                 .padding(.vertical)
             
-            Text("Your opponent chose: \(computerGameChoice.displayValue).")
+            Text("Your opponent chose: \(viewModel.computerGameChoice.displayValue).")
             
-            Text("Your goal is to : \(playerShouldWin ? " Win " : "Lose ")")
+            Text("Your goal is to : \(viewModel.playerShouldWin ? " Win " : "Lose ")")
             
             Text("Which should you choose?")
                 .padding(.vertical)
@@ -35,9 +40,9 @@ struct RockPaperScissorsView: View {  // opens struct
                 }  // closes button action
             }
             
-            Text("Score: \(playerScore)")
+            Text("Score: \(viewModel.playerScore)")
                 .padding()
-                .alert("Game Over!\nFinal score is: \(playerScore)", isPresented: $isShowingGameOverAlert) {
+                .alert("Game Over!\nFinal score is: \(viewModel.playerScore)", isPresented: $viewModel.isShowingGameOverAlert) {
                     Button("Restart") {
                         resetGame()
                     }
@@ -50,30 +55,30 @@ struct RockPaperScissorsView: View {  // opens struct
         updateScore(playerWasCorrect: playerWasCorrect)
         
         // update number of questions that have been answered
-        numOfAnsweredQuestions += 1
+        viewModel.numOfAnsweredQuestions += 1
         checkIfGameIsOver()
         
-        playerShouldWin.toggle()
+        viewModel.playerShouldWin.toggle()
         getComputerChoice()
     }
     
     func getComputerChoice() {     // opens function
-        computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
+        viewModel.computerGameChoice = GameChoice.allCases.randomElement() ?? .rock
     }
     
     func checkIfGameIsOver() {
         // if game is over
-        if numOfAnsweredQuestions == 10 {
+        if viewModel.numOfAnsweredQuestions == 10 {
             print("Game Over")
-            isShowingGameOverAlert = true
+            viewModel.isShowingGameOverAlert = true
         } else {
-            print("Game is not over because you only answered \(numOfAnsweredQuestions)")
+            print("Game is not over because you only answered \(viewModel.numOfAnsweredQuestions)")
         }
     }
     
     func resetGame() {
-        playerScore = 0
-        numOfAnsweredQuestions = 0
+        viewModel.playerScore = 0
+        viewModel.numOfAnsweredQuestions = 0
     }
     
     private func checkAnswer(_ choice: GameChoice) -> Bool {
@@ -82,21 +87,21 @@ struct RockPaperScissorsView: View {  // opens struct
         
         let correctChoice: GameChoice
         
-        switch computerGameChoice {
+        switch viewModel.computerGameChoice {
         case .rock:
-            if playerShouldWin {
+            if viewModel.playerShouldWin {
                 correctChoice = .paper
             } else {
                 correctChoice = .scissors
             }
         case .paper:
-            if playerShouldWin {
+            if viewModel.playerShouldWin {
                 correctChoice = .scissors
             } else {
                 correctChoice = .rock
             }
         case .scissors:
-            if playerShouldWin {
+            if viewModel.playerShouldWin {
                 correctChoice = .rock
             } else {
                 correctChoice = .paper
@@ -104,7 +109,7 @@ struct RockPaperScissorsView: View {  // opens struct
         }
         
         let didPlayerWin = (correctChoice == choice)
-        return didPlayerWin == playerShouldWin
+        return didPlayerWin == viewModel.playerShouldWin
     }
     
     private func updateScore(playerWasCorrect: Bool) {
@@ -112,9 +117,9 @@ struct RockPaperScissorsView: View {  // opens struct
         // if incorrect minus one to the score
         // compare if did player win and should they win
         if playerWasCorrect {
-            playerScore += 1
+            viewModel.playerScore += 1
         } else {
-            playerScore -= 1
+            viewModel.playerScore -= 1
         }
     }
 }  // closes struct
