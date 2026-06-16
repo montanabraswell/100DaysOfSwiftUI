@@ -81,38 +81,31 @@ struct ContentView: View {  // opens struct
         // if correct, plus one to the score
         // if incorrect minus one to the score
         // compare if did player win and should they win
-    
-        var didPlayerWin: Bool
+        
         let correctChoice: GameChoice
         
         switch computerGameChoice {
         case .rock:
-            //copy teh rest to paper and scissors then uncomments line 97 to 101
             if playerShouldWin {
                 correctChoice = .paper
             } else {
                 correctChoice = .scissors
             }
-            didPlayerWin = (correctChoice == playerChoice)
-            
         case .paper:
-            //
             if playerShouldWin {
                 correctChoice = .scissors
             } else {
                 correctChoice = .rock
             }
-            didPlayerWin = (correctChoice == playerChoice)
         case .scissors:
-            
             if playerShouldWin {
                 correctChoice = .rock
             } else {
                 correctChoice = .paper
             }
-            didPlayerWin = (correctChoice == playerChoice)
         }
         
+        let didPlayerWin = (correctChoice == playerChoice)
         
         if didPlayerWin == playerShouldWin {
             playerScore += 1
