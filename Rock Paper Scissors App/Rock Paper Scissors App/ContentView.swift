@@ -7,21 +7,6 @@
 
 import SwiftUI
 
-
-enum GameChoice: String, CaseIterable {
-    case rock
-    case paper
-    case scissors
-    
-    var displayValue: String {
-        switch self {
-        case .rock: "Rock"
-        case .paper: "Paper"
-        case .scissors: "Scissors"
-        }
-    }
-}  // closes enum
-
 struct ContentView: View {  // opens struct
    
        @State private var playerScore = 0
