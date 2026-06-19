@@ -27,31 +27,47 @@ struct ContentView: View {
     var body: some View {
         NavigationStack{
             Form {
-                VStack(alignment: .leading, spacing: 0) {
+                Section(header: Text("Start time")) {
+                    
+                    //create title field
                     Text("When do you want to wake up?")
                         .font(.headline)
                     
                     DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                         .labelsHidden()
+                
                 }
+                
+                Section(header: Text("Sleep time")) {
+                    
+                    // create sleep field
     
-                VStack(alignment: .leading, spacing: 0) {
                     Text("Desired amount of sleep")
                         .font(.headline)
                     
                     Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
                 }
                 
-                VStack(alignment: .leading, spacing: 0) {
+                Section(header: Text("Coffee consumption")) {
+
                     Text("Daily coffee intake")
                         .font(.headline)
                     
-                    Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                    //Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                    
+                    Picker("^[\(coffeeAmount) cup](inflect: true)", selection: $coffeeAmount) {
+                        ForEach(1..<21) {coffee in
+                            Text("\(coffee)")
+                        }
+                    }
                 }
             }
             .navigationTitle("BetterRest")
             .toolbar {
-                Button("Calculate", action: calculateBedtime)
+                //Button("Calculate", action: calculateBedtime)
+                Text("Desired amount of sleep is .. ")
+                    .font(.headline)
+                
             }
             .alert(alertTitle, isPresented: $showingAlert) {
                 Button("OK") {}
