@@ -1,0 +1,29 @@
+{
+  "activityEntities" : [
+    "projectCreated",
+    [
+      {
+        "createdDate" : "2026-06-18T15:42:02Z",
+        "event" : "projectCreated",
+        "id" : "3722798D-DE3B-492F-B6CD-E1AFAF85985C",
+        "subtitle" : "BetterRest",
+        "title" : "Project Created"
+      }
+    ]
+  ],
+  "authorName" : "Montana Braswell",
+  "createdDate" : "2026-06-18T15:42:02Z",
+  "description" : "",
+  "id" : "74FB7097-9ABE-4081-BEC1-753E2707F15F",
+  "license" : "",
+  "location" : "",
+  "modifiedDate" : "2026-06-18T15:42:02Z",
+  "projectName" : "BetterRest",
+  "settingsEntity" : {
+    "snapshotOnExtendTraining" : true,
+    "snapshotOnResumeTraining" : false
+  },
+  "taskType" : "generalRegresor",
+  "title" : "Tabular Regression",
+  "version" : "1.1"
+}

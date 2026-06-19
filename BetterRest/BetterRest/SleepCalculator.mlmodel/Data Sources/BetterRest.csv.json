@@ -1,0 +1,41 @@
+{
+  "activityEntities" : [
+    "dataSourceTrainingStarted",
+    [
+      {
+        "createdDate" : "2026-06-18T15:46:30Z",
+        "event" : "dataSourceTrainingStarted",
+        "id" : "FAA42726-EDD6-4B24-A77B-8FB7E70E59B4",
+        "subtitle" : "BetterRest 1",
+        "title" : "Used By"
+      }
+    ],
+    "dataSourceMetrics",
+    [
+      {
+        "createdDate" : "2026-06-18T15:46:30Z",
+        "event" : "dataSourceMetrics",
+        "id" : "7B505110-7E28-4B80-AFA1-E71AB9F9BD62",
+        "subtitle" : "10,000 Items",
+        "title" : "Data Summary"
+      }
+    ]
+  ],
+  "createdDate" : "2026-06-18T15:44:06Z",
+  "dataPathRelativeToProjectURL" : "../../Downloads/HackingWithSwift-main/SwiftUI/project4-files/BetterRest.csv/",
+  "dataResult" : {
+    "createdDate" : "2026-06-18T15:44:06Z",
+    "dataSourceID" : "9B9A18C0-E12C-4D13-9E3B-CE32E680EC3B",
+    "dataURL" : "file:///Users/montanabraswell/Downloads/HackingWithSwift-main/SwiftUI/project4-files/BetterRest.csv"
+  },
+  "dataURL" : "file:///Users/montanabraswell/Downloads/HackingWithSwift-main/SwiftUI/project4-files/BetterRest.csv",
+  "experimentIDs" : [
+    "877A320C-F623-4CA4-BE02-A5621B6E5FE1"
+  ],
+  "id" : "9B9A18C0-E12C-4D13-9E3B-CE32E680EC3B",
+  "modifiedDate" : "2026-06-18T15:46:30Z",
+  "pathType" : 0,
+  "preferredFilename" : "BetterRest.csv",
+  "title" : "BetterRest.csv",
+  "version" : "1.0"
+}
