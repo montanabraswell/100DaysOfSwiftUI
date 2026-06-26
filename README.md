@@ -27,7 +27,7 @@ This repo is my learning log that will be updated daily.
 
 ## 📊 Progress
 
-`▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **23 / 100**
+`▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **30 / 100**
 
 ---
 
@@ -58,8 +58,16 @@ This repo is my learning log that will be updated daily.
 | Day 21 | Project 2 continued | Button styling, animation intro |
 | Day 22 | Project 2 continued | Completed Guess the Flag |
 | Day 23 | Project 3 — Views & Modifiers | Currently in progress ⬅️ |
-| Day 24 | _Coming soon_ | |
-| Day 25 | _Coming soon_ | |
+| Day 24 | Project 3, part two | Completed |
+| Day 25 | Project 3, Milestone: Projects 1-3 | Completed |
+| Day 26 | Project 4, part one | Completed |
+| Day 27 | Project 4, part two | Completed |
+| Day 28 | Project 4, part three | Completed |
+| Day 29 | Project 5, part one | Completed |
+| Day 30 | Project 5, part two | Completed |
+| Day 31 | Project 5, part three | Currently in progress ⬅️ |
+
+
 
 > _Table updates as I complete each day. Full project files are in the matching folders above._
 
