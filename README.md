@@ -1,6 +1,6 @@
 # 100 Days of SwiftUI 🍎
 
-![Progress](https://img.shields.io/badge/Progress-Day%2023%20of%20100-purple)
+![Progress](https://img.shields.io/badge/Progress-Day%2030%20of%20100-purple)
 ![Language](https://img.shields.io/badge/Language-Swift-orange)
 ![Framework](https://img.shields.io/badge/Framework-SwiftUI-blue)
 
