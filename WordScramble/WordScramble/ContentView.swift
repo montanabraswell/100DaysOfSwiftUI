@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var errorTitle = ""
     @State private var errorMessage = ""
     @State private var showingError = false
+    @State private var diplayStartWord = false
+    @State private var userScore = 0
     
     var body: some View {
         NavigationStack{
@@ -31,7 +33,7 @@ struct ContentView: View {
                             Text(word)
                         }
                     }
-                }
+                }; Text("Score:")
             }
             .navigationTitle(rootWord)
             .onSubmit(addNewWord)
@@ -41,15 +43,36 @@ struct ContentView: View {
             }  message: {
                     Text(errorMessage)
                 }
+            .toolbar {
+                Button("Restart Game", action: restartGame)
+                }
             }
+        .navigationTitle("WordScramble")
         }
     
+    func calculateScore() {
+
+
+    }
+    
+    func restartGame() {
+        // pick a new word
+        startGame()
+    }
     
     func addNewWord() {
         
         // lower cases the word,
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         
+        guard answer != rootWord.lowercased() else {
+            wordError(title: "Can't use the same word as the start word", message: "try again")
+            return
+        }
+        guard answer.count >= 3 else {
+            wordError(title: "Word is too short", message: "try again")
+            return
+        }
         guard answer.count > 0 else {
             return
         }
