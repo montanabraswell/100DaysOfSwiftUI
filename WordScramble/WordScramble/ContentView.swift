@@ -33,7 +33,10 @@ struct ContentView: View {
                             Text(word)
                         }
                     }
-                }; Text("Score:")
+                }
+                Section{
+                    Text("Score: \(userScore)")
+                }
             }
             .navigationTitle(rootWord)
             .onSubmit(addNewWord)
@@ -50,14 +53,23 @@ struct ContentView: View {
         .navigationTitle("WordScramble")
         }
     
-    func calculateScore() {
-
+    func calculateScore(word: String) {
+        
+        if word.count >= 3 && word.count <= 5 {
+            userScore += 1
+        } else if word.count >= 6 && word.count <= 8 {
+            userScore += 5
+        } else if word.count >= 9{
+            userScore += 10
+        }
 
     }
     
     func restartGame() {
         // pick a new word
         startGame()
+        userScore = 0
+        usedWords = []
     }
     
     func addNewWord() {
@@ -93,6 +105,7 @@ struct ContentView: View {
         }
         withAnimation {
             usedWords.insert(answer, at: 0)
+            calculateScore(word: answer)
             
         }
         newWord = ""
