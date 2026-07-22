@@ -39,6 +39,9 @@ struct ContentView: View {
     @State private var gameOverAlertTitle = ""
     @State private var gameOverAlertMessage = ""
     
+    @State private var isFlagTappedSpinning = false
+    @State private var numOfRotations = 0.0
+    
   
     
     struct FlagImage: View {
@@ -51,6 +54,7 @@ struct ContentView: View {
         }
     }
 
+    
     var body: some View {
         ZStack {
             RadialGradient(stops: [
@@ -76,17 +80,30 @@ struct ContentView: View {
                         Text(countries[correctAnswer])
                             .modifier(LargeTitleStyle())
                             //.font(.largeTitle.weight(.semibold))
+                        
                     }
 
                     ForEach(0..<3) { number in
                         Button {
                             flagTapped(number)
-                            //updateDisplayScore = true
+                            
                         } label: {
-                            FlagImage(imageName: countries[number])
-                                .clipShape(.capsule)
-                                .shadow(radius: 5)
+                            // should rotate if correct answer == number
+//                            if correctAnswer == number {
+                            let rotationDegrees = correctAnswer == number ? numOfRotations * 360 : 0
+                            
+                                FlagImage(imageName: countries[number])
+                                    .rotation3DEffect(.degrees(rotationDegrees), axis: (x: 0, y: 1, z: 0))
+                                    .animation(
+                                        .linear(duration: 2),
+                                        value: numOfRotations
+                                    )
+//                            } else {
+//                                FlagImage(imageName: countries[number])
+//                            }
+                               
                         }
+                        
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -137,6 +154,9 @@ struct ContentView: View {
             //showAlert = false
             //updateDisplayScore = true
             userScore += 1
+            
+            numOfRotations += 1
+
         
         } else {
             questionAnswerAlertTitle = "Wrong!"
