@@ -42,6 +42,20 @@ struct ContentView: View {
     @State private var isFlagTappedSpinning = false
     @State private var numOfRotations = 0.0
     
+    @State private var attempts: Int = 0
+    
+    struct Shake: GeometryEffect {
+        var amount: CGFloat = 10
+        var shakesPerUnit = 3
+        var animatableData: CGFloat
+        
+        func effectValue(size: CGSize) -> ProjectionTransform {
+               ProjectionTransform(CGAffineTransform(translationX:
+                   amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+                   y: 0))
+           }
+    }
+    
   
     
     struct FlagImage: View {
@@ -91,18 +105,18 @@ struct ContentView: View {
                             // should rotate if correct answer == number
 //                            if correctAnswer == number {
                             let rotationDegrees = correctAnswer == number ? numOfRotations * 360 : 0
-                            
+                        
                                 FlagImage(imageName: countries[number])
                                     .rotation3DEffect(.degrees(rotationDegrees), axis: (x: 0, y: 1, z: 0))
                                     .animation(
                                         .linear(duration: 2),
                                         value: numOfRotations
                                     )
-//                            } else {
-//                                FlagImage(imageName: countries[number])
-//                            }
-                               
                         }
+                        .opacity(isShowingQuestionAnswerAlert && number != correctAnswer ? 0.25 : 1)
+                        
+                        .modifier(Shake(animatableData: CGFloat(self.attempts)))
+                       
                         
                     }
                 }
@@ -138,8 +152,11 @@ struct ContentView: View {
         
         .alert(gameOverAlertTitle, isPresented: $isShowingGameOverAlert) {
             Button("Restart") {
+               
                 resetGame()
             }
+    
+            
         } message: {
             Text(gameOverAlertMessage)
         }
@@ -163,6 +180,11 @@ struct ContentView: View {
             //updateDisplayScore = false
             userScore -= 1
             //showAlert = true
+            userScore -= 1
+            // adding default animations
+            withAnimation(.default) {
+                self.attempts += 1
+            }
         }
         
         let flagMessage = "That's the flag of \(countries[correctAnswer])."
