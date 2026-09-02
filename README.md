@@ -1,6 +1,6 @@
 # 100 Days of SwiftUI 🍎
 
-![Progress](https://img.shields.io/badge/Progress-Day%2030%20of%20100-purple)
+![Progress](https://img.shields.io/badge/Progress-Day%2034%20of%20100-purple)
 ![Language](https://img.shields.io/badge/Language-Swift-orange)
 ![Framework](https://img.shields.io/badge/Framework-SwiftUI-blue)
 
@@ -27,7 +27,7 @@ This repo is my learning log that will be updated daily.
 
 ## 📊 Progress
 
-`▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **30 / 100**
+`▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **34 / 100**
 
 ---
 
@@ -57,7 +57,7 @@ This repo is my learning log that will be updated daily.
 | Day 20 | Project 2 — Guess the Flag | Images, gradients, alerts |
 | Day 21 | Project 2 continued | Button styling, animation intro |
 | Day 22 | Project 2 continued | Completed Guess the Flag |
-| Day 23 | Project 3 — Views & Modifiers | Currently in progress ⬅️ |
+| Day 23 | Project 3 — Views & Modifiers | Currently in progress |
 | Day 24 | Project 3, part two | Completed |
 | Day 25 | Project 3, Milestone: Projects 1-3 | Completed |
 | Day 26 | Project 4, part one | Completed |
@@ -65,7 +65,13 @@ This repo is my learning log that will be updated daily.
 | Day 28 | Project 4, part three | Completed |
 | Day 29 | Project 5, part one | Completed |
 | Day 30 | Project 5, part two | Completed |
-| Day 31 | Project 5, part three | Currently in progress ⬅️ |
+| Day 31 | Project 5, part three | Completed |
+| Day 32 | Project 6, part one | Completed |
+| Day 33 | Project 6, part two | Completed |
+| Day 34 | Project 6, part three | Completed |
+| Day 35 | Milestone: Projects 4-6 | Currently in progress |
+
+
 
 
 
@@ -107,4 +113,3 @@ If you're also doing the challenge, please reach out! :)
 
 ---
 
-_Started: March 2026 · Target completion: June 2026_
