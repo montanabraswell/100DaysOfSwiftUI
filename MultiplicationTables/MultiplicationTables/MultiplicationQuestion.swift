@@ -21,3 +21,13 @@ struct MultiplicationQuestion {
         return String(answer)
     }
 }
+
+
+extension MultiplicationQuestion {
+    static func random(table: Int) -> MultiplicationQuestion {
+       
+        let randomNumber = Int.random(in: 1...12)
+        
+        return MultiplicationQuestion(num1: randomNumber, num2: table)
+    }
+}

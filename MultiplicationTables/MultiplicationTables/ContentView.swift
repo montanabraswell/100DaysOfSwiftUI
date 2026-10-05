@@ -11,10 +11,14 @@ struct ContentView: View {
   
     @State private var userAnswer = ""
     @State private var maxNumOfQuestions = 5
+    @State private var numOfAnsweredQuestions = 0
+    //@State private var correctAnswer = Int.random(in: 0...2)
     //@State private var currentQuestion = MultiplicationQuestion(num1: 8, num2: 7)
     @State private var questionIndex = 0
-    @State private var questions = [ MultiplicationQuestion(num1: 8, num2: 7),
-        MultiplicationQuestion(num1: 9, num2: 8)]
+    @State private var questions = [
+        MultiplicationQuestion.random(table: 7),
+        MultiplicationQuestion.random(table: 7)
+    ]
     @State private var score = 0
     
 
