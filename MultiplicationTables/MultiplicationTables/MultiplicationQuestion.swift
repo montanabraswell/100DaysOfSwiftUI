@@ -20,14 +20,12 @@ struct MultiplicationQuestion {
         let answer = num1 * num2
         return String(answer)
     }
-}
-
-
-extension MultiplicationQuestion {
-    static func random(table: Int) -> MultiplicationQuestion {
-       
-        let randomNumber = Int.random(in: 1...12)
-        
-        return MultiplicationQuestion(num1: randomNumber, num2: table)
-    }
+       static func random(table: Int) -> MultiplicationQuestion {
+            
+            // create a random number between 1-12
+           let randomNumber = Int.random(in: 1...12)
+            return MultiplicationQuestion(num1: randomNumber, num2: table)
+            
+        }
+  
 }

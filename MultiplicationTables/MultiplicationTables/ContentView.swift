@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var userAnswer = ""
     @State private var maxNumOfQuestions = 5
     @State private var numOfAnsweredQuestions = 0
+    // new needs a starting default
+    @State private var tableToPractice = 7
     //@State private var correctAnswer = Int.random(in: 0...2)
     //@State private var currentQuestion = MultiplicationQuestion(num1: 8, num2: 7)
     @State private var questionIndex = 0
@@ -24,7 +26,20 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            // allows user to select what number for questions to choose between
             
+            Picker("Select a number of Questions", selection: $maxNumOfQuestions)
+            {
+                ForEach([5,10,20], id: \.self) { number in Text("\(number)")
+                }
+            }
+            // allows user to select what number of tables to choose between
+            
+            Picker("Select a number of Tables", selection: $tableToPractice)
+            {
+                ForEach(2...12, id: \.self) { number in Text("\(number)")
+                }
+            }
             Text(questions[questionIndex].displayString)
                 .background(.red)
                 .font(.largeTitle)
